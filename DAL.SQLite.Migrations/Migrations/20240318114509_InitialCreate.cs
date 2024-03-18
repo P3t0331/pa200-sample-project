@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DAL.SQLite.Migrations.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -324,7 +324,9 @@ namespace DAL.SQLite.Migrations.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     BookId = table.Column<int>(type: "INTEGER", nullable: false),
                     CustomerId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PurchaseDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    PurchaseDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Paid = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -334,7 +336,7 @@ namespace DAL.SQLite.Migrations.Migrations
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PurchaseHistories_Customers_CustomerId",
                         column: x => x.CustomerId,
@@ -465,13 +467,13 @@ namespace DAL.SQLite.Migrations.Migrations
 
             migrationBuilder.InsertData(
                 table: "PurchaseHistories",
-                columns: new[] { "Id", "BookId", "CustomerId", "PurchaseDate" },
+                columns: new[] { "Id", "BookId", "CustomerId", "Paid", "PurchaseDate", "TotalPrice" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, new DateTime(2023, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 3, 1, new DateTime(2023, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, 4, 2, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, 5, 3, new DateTime(2023, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, 1, 1, false, new DateTime(2023, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 15.99m },
+                    { 2, 3, 1, true, new DateTime(2023, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 25.99m },
+                    { 3, 4, 2, true, new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 18.99m },
+                    { 4, 5, 3, true, new DateTime(2023, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 22.99m }
                 });
 
             migrationBuilder.InsertData(

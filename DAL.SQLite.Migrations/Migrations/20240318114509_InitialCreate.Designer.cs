@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.SQLite.Migrations.Migrations
 {
     [DbContext(typeof(BookHubDBContext))]
-    [Migration("20240106154907_CascadeDeletePurchaseHistories")]
-    partial class CascadeDeletePurchaseHistories
+    [Migration("20240318114509_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -359,7 +359,13 @@ namespace DAL.SQLite.Migrations.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("Paid")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("PurchaseDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("TotalPrice")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -376,28 +382,36 @@ namespace DAL.SQLite.Migrations.Migrations
                             Id = 1,
                             BookId = 1,
                             CustomerId = 1,
-                            PurchaseDate = new DateTime(2023, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Paid = false,
+                            PurchaseDate = new DateTime(2023, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalPrice = 15.99m
                         },
                         new
                         {
                             Id = 2,
                             BookId = 3,
                             CustomerId = 1,
-                            PurchaseDate = new DateTime(2023, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Paid = true,
+                            PurchaseDate = new DateTime(2023, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalPrice = 25.99m
                         },
                         new
                         {
                             Id = 3,
                             BookId = 4,
                             CustomerId = 2,
-                            PurchaseDate = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Paid = true,
+                            PurchaseDate = new DateTime(2023, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalPrice = 18.99m
                         },
                         new
                         {
                             Id = 4,
                             BookId = 5,
                             CustomerId = 3,
-                            PurchaseDate = new DateTime(2023, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Paid = true,
+                            PurchaseDate = new DateTime(2023, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TotalPrice = 22.99m
                         });
                 });
 
