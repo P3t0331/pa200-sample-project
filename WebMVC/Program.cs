@@ -22,7 +22,7 @@ builder.Services.AddControllersWithViews();
 var sqliteDbName = "bookhubproject2.db";
 var dbPath = Path.Combine(Environment.CurrentDirectory, sqliteDbName);
 var sqliteConnectionString = $"Data Source={dbPath}";
-var postgresqlConnectionString = $"Host=10.0.2.4;Port=5432;Database={sqliteDbName};Username=postgresql;Password=password";
+var postgresqlConnectionString = $"Host=10.0.2.4;Port=5432;Database={sqliteDbName};Username=postgres;Password=password";
 
 builder.Services.AddDbContextFactory<BookHubDBContext>(options =>
 {
