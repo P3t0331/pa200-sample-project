@@ -886,7 +886,8 @@
       "BusinessLayer/1.0.0": {
         "dependencies": {
           "DataAccessLayer": "1.0.0",
-          "Mapster": "7.4.0"
+          "Mapster": "7.4.0",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.11"
         },
         "runtime": {
           "BusinessLayer.dll": {}
@@ -894,7 +895,8 @@
       },
       "DAL.SQLite.Migrations/1.0.0": {
         "dependencies": {
-          "DataAccessLayer": "1.0.0"
+          "DataAccessLayer": "1.0.0",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.11"
         },
         "runtime": {
           "DAL.SQLite.Migrations.dll": {}
@@ -906,7 +908,8 @@
           "Microsoft.EntityFrameworkCore": "7.0.14",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.14",
           "Microsoft.EntityFrameworkCore.Sqlite": "7.0.12",
-          "Microsoft.EntityFrameworkCore.Sqlite.Core": "7.0.12"
+          "Microsoft.EntityFrameworkCore.Sqlite.Core": "7.0.12",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.11"
         },
         "runtime": {
           "DataAccessLayer.dll": {}
