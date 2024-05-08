@@ -19,17 +19,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // register DBContext:
-var sqliteDbName = "bookhubproject2.db";
-var dbPath = Path.Combine(Environment.CurrentDirectory, sqliteDbName);
-var sqliteConnectionString = $"Data Source={dbPath}";
+var postgresConnectionString = "Host=pa200-postgres-hw2.postgres.database.azure.com;Port=5432;Database=postgres;Username=P3t0331;Password=Test12345!;";
 
 builder.Services.AddDbContextFactory<BookHubDBContext>(options =>
 {
-    options
-        .UseSqlite(
-            sqliteConnectionString,
-            x => x.MigrationsAssembly("DAL.SQLite.Migrations")
-        );
+    options.UseNpgsql(
+        postgresConnectionString,
+        x => x.MigrationsAssembly("DAL.MSSQL.Migrations")
+    );
 });
 
 /* Register Services */
