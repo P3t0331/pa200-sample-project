@@ -3,7 +3,7 @@ name: .NET CI/CD Pipeline to Azure App Service
 on:
   push:
     branches:
-      - main  # Set this to your default branch
+      - main
 
 jobs:
   build_and_deploy:
@@ -33,7 +33,7 @@ jobs:
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'pa200-bookhub'  # Set this to your Azure App Service name
-        slot-name: 'production'  # Adjust or remove if you deploy to a specific slot
+        app-name: 'pa200-bookhub'
+        slot-name: 'production'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: ${{env.DOTNET_ROOT}}/publish
