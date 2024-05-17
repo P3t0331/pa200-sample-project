@@ -12,6 +12,9 @@ using BusinessLayer.DTOs.Genre;
 using WebMVC.Binders;
 using System.Globalization;
 using BusinessLayer.DTOs.PurchaseHistory;
+using Azure.Security.KeyVault.Secrets;
+using Azure.Identity;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,12 +22,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // register DBContext:
-var postgresConnectionString = "Host=pa200-postgres-hw2.postgres.database.azure.com;Port=5432;Database=postgres;Username=P3t0331;Password=Test12345!;";
+var postgresConnectionString = "Host=pa200-postgres-hw2.postgres.database.azure.com;Port=5432;Database=postgres;Username=493141@muni.cz;";
+var defaultCredential = new DefaultAzureCredential();
+var tokenRequestContext = new Azure.Core.TokenRequestContext(new[] { "https://ossrdbms-aad.database.windows.net/.default" });
+var accessToken = (await defaultCredential.GetTokenAsync(tokenRequestContext)).Token;
+var connString = new NpgsqlConnectionStringBuilder(postgresConnectionString)
+{
+    Password = accessToken
+}.ConnectionString;
+
+
 
 builder.Services.AddDbContextFactory<BookHubDBContext>(options =>
 {
     options.UseNpgsql(
-        postgresConnectionString,
+        connString,
         x => x.MigrationsAssembly("DAL.MSSQL.Migrations")
     );
 });
