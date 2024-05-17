@@ -22,7 +22,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // register DBContext:
-var postgresConnectionString = "Host=pa200-postgres-hw2.postgres.database.azure.com;Port=5432;Database=postgres;Username=493141@muni.cz;SslMode=Require;TrustServerCertificate=true;";
+var postgresConnectionString = "Host=pa200-postgres-hw2.postgres.database.azure.com;Port=5432;Database=postgres;Username=pa200-bookhub;SslMode=Require;TrustServerCertificate=true;";
 var defaultCredential = new DefaultAzureCredential();
 var tokenRequestContext = new Azure.Core.TokenRequestContext(new[] { "https://ossrdbms-aad.database.windows.net/.default" });
 
