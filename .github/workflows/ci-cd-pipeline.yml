@@ -28,7 +28,7 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
 
     - name: Publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/publish
+      run: dotnet publish -c Debug -o ${{env.DOTNET_ROOT}}/publish
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
